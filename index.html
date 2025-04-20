@@ -1,22 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>청첩장으로 이동 중...</title>
 </head>
-<body style="margin:0; background:#fff; display:flex; align-items:center; justify-content:center; height:100vh;">
-  <p style="font-size:1.2em;">브금과 함께 청첩장으로 이동 중입니다...</p>
+<body style="margin:0; background:#fff; display:flex; align-items:center; justify-content:center; height:100vh; flex-direction: column;">
+  <p style="font-size:1.2em;">브금과 함께 청첩장으로 이동 중입니다...<br>어디든 한 번만 터치해주세요 🎵</p>
 
-  <!-- 🔊 브금 자동재생 -->
-  <audio autoplay loop>
-    <source src="https://lcs970.github.io/wedding-bgm/%5BMV%5D%20V%20-%20Christmas%20Tree%20__%20%EA%B7%B8%20%ED%95%B4%20%EC%9A%B0%EB%A6%AC%EB%8A%94(Our%20Beloved%20Summer)%20OST%20Part.5.mp3" type="audio/mpeg" />
-  </audio>
-
-  <script>
-    // 3초 후 청첩장 링크로 이동
-    setTimeout(() => {
-      location.href = "https://scenekoong.com/invitations/wedding/quqKcB";
-    }, 3000);
-  </script>
-</body>
-</html>
+  <audio id="bgm" autoplay muted loop>
+    <source src="https://lcs970.github.io/wedding-bgm/%5BMV
