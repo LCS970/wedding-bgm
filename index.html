@@ -2,57 +2,16 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>청첩장 브금 페이지</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.2rem;
-      text-align: center;
-    }
-  </style>
+  <title>테스트 이동</title>
 </head>
-<body>
-  <div>
-    <p>브금과 함께 청첩장으로 이동 중입니다...<br>어디든 한 번만 터치해주세요 🎵</p>
-  </div>
-
-  <audio id="bgm" loop>
-    <source src="https://lcs970.github.io/wedding-bgm/%5BMV%5D%20V%20-%20Christmas%20Tree%20__%20%EA%B7%B8%20%ED%95%B4%20%EC%9A%B0%EB%A6%AC%EB%8A%94(Our%20Beloved%20Summer)%20OST%20Part.5.mp3" type="audio/mpeg">
-  </audio>
+<body style="display:flex; align-items:center; justify-content:center; height:100vh;">
+  <p>테스트 중입니다. 아무 곳이나 클릭하면 이동됩니다.</p>
 
   <script>
-    let started = false;
-    document.addEventListener('click', () => {
-      if (started) return;
-      started = true;
-      const bgm = document.getElementById('bgm');
-      const triedPlay = bgm.play();
-
-      if (triedPlay !== undefined) {
-        triedPlay
-          .then(() => {
-            // 음악 재생 성공
-            setTimeout(() => {
-              location.href = "https://scenekoong.com/invitations/wedding/quqKcB";
-            }, 3000);
-          })
-          .catch((error) => {
-            // 음악 재생 실패 → 그래도 이동
-            console.warn("음악 재생 실패:", error);
-            setTimeout(() => {
-              location.href = "https://scenekoong.com/invitations/wedding/quqKcB";
-            }, 3000);
-          });
-      } else {
-        // 일부 구형 브라우저 → 바로 이동
-        setTimeout(() => {
-          location.href = "https://scenekoong.com/invitations/wedding/quqKcB";
-        }, 3000);
-      }
+    document.addEventListener('click', function () {
+      setTimeout(() => {
+        window.location.href = "https://scenekoong.com/invitations/wedding/quqKcB";
+      }, 3000);
     });
   </script>
 </body>
