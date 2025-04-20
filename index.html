@@ -1,11 +1,45 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <title>청첩장으로 이동 중...</title>
+  <meta charset="UTF-8">
+  <title>브금 청첩장 연결</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+  </style>
 </head>
-<body style="margin:0; background:#fff; display:flex; align-items:center; justify-content:center; height:100vh; flex-direction: column;">
-  <p style="font-size:1.2em;">브금과 함께 청첩장으로 이동 중입니다...<br>어디든 한 번만 터치해주세요 🎵</p>
+<body>
+  <div>
+    <p>브금과 함께 청첩장으로 이동 중입니다...<br>어디든 한 번만 터치해주세요 🎵</p>
+  </div>
 
-  <audio id="bgm" autoplay muted loop>
-    <source src="https://lcs970.github.io/wedding-bgm/%5BMV
+  <audio id="bgm" loop>
+    <source src="https://lcs970.github.io/wedding-bgm/%5BMV%5D%20V%20-%20Christmas%20Tree%20__%20%EA%B7%B8%20%ED%95%B4%20%EC%9A%B0%EB%A6%AC%EB%8A%94(Our%20Beloved%20Summer)%20OST%20Part.5.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    let started = false;
+    document.addEventListener('click', () => {
+      if (started) return;
+      started = true;
+      const bgm = document.getElementById('bgm');
+      bgm.play().then(() => {
+        // 재생 성공 → 3초 후 이동
+        setTimeout(() => {
+          location.href = "https://scenekoong.com/invitations/wedding/quqKcB";
+        }, 3000);
+      }).catch((e) => {
+        alert("브금 재생이 차단되었습니다. 다시 클릭해주세요.");
+        started = false;
+      });
+    });
+  </script>
+</body>
+</html>
