@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>브금 연결 중간 페이지</title>
+  <meta charset="UTF-8" />
+  <title>브금 유도 클릭 시뮬레이터</title>
   <style>
     body {
       margin: 0;
       height: 100vh;
+      font-size: 1.2rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-size: 1.2rem;
-      background-color: #fff;
       text-align: center;
+      background-color: #fff;
     }
     #status {
       margin-top: 1rem;
@@ -22,35 +22,31 @@
   </style>
 </head>
 <body>
-  <p>화면을 한 번만 터치해주세요 🎵<br>브금이 켜진 채 청첩장으로 이동합니다</p>
+  <p>화면을 한 번만 눌러주세요 🎵<br>브금 활성화 후 청첩장으로 이동합니다</p>
   <p id="status">대기 중...</p>
 
   <script>
     const status = document.getElementById("status");
-    let clicked = false;
+    let started = false;
 
     document.addEventListener("click", () => {
-      if (clicked) return;
-      clicked = true;
+      if (started) return;
+      started = true;
 
-      // 무음 브금 생성 및 재생 시도
-      const dummyAudio = new Audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
-      dummyAudio.volume = 0;
+      status.textContent = "✅ 클릭 감지됨! 반복 클릭 시뮬레이션 중...";
 
-      dummyAudio.play()
-        .then(() => {
-          status.textContent = "✅ 브금 재생 시도 성공! 청첩장으로 이동 중...";
-        })
-        .catch((err) => {
-          status.textContent = "⚠️ 브금 재생 시도 실패... 그래도 이동합니다.";
-          console.warn("오디오 재생 실패:", err);
-        })
-        .finally(() => {
-          // 1초 후 청첩장으로 이동
-          setTimeout(() => {
-            window.location.href = "https://scenekoong.com/invitations/wedding/quqKcB";
-          }, 1000);
-        });
+      // 클릭 반복 시뮬레이션: 0.1초 간격으로 4번
+      let count = 0;
+      const interval = setInterval(() => {
+        console.log("🔁 가상 클릭 #" + (count + 1));
+        count++;
+        if (count >= 4) clearInterval(interval);
+      }, 100);
+
+      // 0.4초 후 청첩장으로 이동
+      setTimeout(() => {
+        window.location.href = "https://scenekoong.com/invitations/wedding/quqKcB";
+      }, 400);
     });
   </script>
 </body>
