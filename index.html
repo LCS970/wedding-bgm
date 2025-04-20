@@ -2,13 +2,47 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>테스트 이동</title>
+  <title>브금 클릭 확인 테스트</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+    #status {
+      margin-top: 20px;
+      color: green;
+    }
+  </style>
 </head>
-<body style="display:flex; align-items:center; justify-content:center; height:100vh;">
-  <p>테스트 중입니다. 아무 곳이나 클릭하면 이동됩니다.</p>
+<body>
+  <div>
+    <p>화면을 한 번만 터치해주세요 🎵<br>클릭하면 음악 재생 후 청첩장으로 이동합니다.</p>
+    <p id="status">아직 클릭되지 않음</p>
+  </div>
+
+  <audio id="bgm" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
-    document.addEventListener('click', function () {
+    let started = false;
+    document.addEventListener('click', () => {
+      if (started) return;
+      started = true;
+
+      document.getElementById("status").textContent = "✅ 클릭 감지됨! 음악 재생 시작 → 3초 후 이동";
+
+      const bgm = document.getElementById('bgm');
+      bgm.play().catch(() => {
+        console.warn("브라우저에서 재생이 막혔습니다.");
+      });
+
       setTimeout(() => {
         window.location.href = "https://scenekoong.com/invitations/wedding/quqKcB";
       }, 3000);
