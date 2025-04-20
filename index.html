@@ -2,66 +2,55 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>청첩장 브금 연결</title>
+  <title>브금 연결 중간 페이지</title>
   <style>
     body {
       margin: 0;
       height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
       font-size: 1.2rem;
-      background: #fff;
+      background-color: #fff;
+      text-align: center;
     }
     #status {
-      margin-top: 1.2rem;
+      margin-top: 1rem;
       color: #444;
     }
   </style>
 </head>
 <body>
-  <div>
-    <p>어디든 클릭하면 브금 재생 후 청첩장으로 이동합니다 🎵</p>
-    <p id="status">브금 재생 대기 중...</p>
-  </div>
-
-  <audio id="bgm" loop>
-    <source src="https://lcs970.github.io/wedding-bgm/bgm.mp3" type="audio/mpeg">
-  </audio>
+  <p>화면을 한 번만 터치해주세요 🎵<br>브금이 켜진 채 청첩장으로 이동합니다</p>
+  <p id="status">대기 중...</p>
 
   <script>
     const status = document.getElementById("status");
-    let started = false;
+    let clicked = false;
 
     document.addEventListener("click", () => {
-      if (started) return;
-      started = true;
+      if (clicked) return;
+      clicked = true;
 
-      const bgm = document.getElementById("bgm");
-      const playAttempt = bgm.play();
+      // 무음 브금 생성 및 재생 시도
+      const dummyAudio = new Audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3");
+      dummyAudio.volume = 0;
 
-      if (playAttempt !== undefined) {
-        playAttempt
-          .then(() => {
-            status.textContent = "✅ 브금 재생 성공! 1초 후 이동합니다...";
-            setTimeout(() => {
-              window.location.href = "https://scenekoong.com/invitations/wedding/quqKcB";
-            }, 1000); // 1초 후 이동
-          })
-          .catch((err) => {
-            status.textContent = "❌ 브금 재생 실패: " + err.message + " - 그래도 이동합니다.";
-            console.warn("브금 재생 실패:", err);
-            setTimeout(() => {
-              window.location.href = "https://scenekoong.com/invitations/wedding/quqKcB";
-            }, 1000);
-          });
-      } else {
-        status.textContent = "⚠️ 브라우저가 재생 시도를 막았습니다. 1초 후 이동합니다.";
-        setTimeout(() => {
-          window.location.href = "https://scenekoong.com/invitations/wedding/quqKcB";
-        }, 1000);
-      }
+      dummyAudio.play()
+        .then(() => {
+          status.textContent = "✅ 브금 재생 시도 성공! 청첩장으로 이동 중...";
+        })
+        .catch((err) => {
+          status.textContent = "⚠️ 브금 재생 시도 실패... 그래도 이동합니다.";
+          console.warn("오디오 재생 실패:", err);
+        })
+        .finally(() => {
+          // 1초 후 청첩장으로 이동
+          setTimeout(() => {
+            window.location.href = "https://scenekoong.com/invitations/wedding/quqKcB";
+          }, 1000);
+        });
     });
   </script>
 </body>
